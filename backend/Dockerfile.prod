@@ -12,10 +12,31 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Build stage
+FROM python:3.12-slim as builder
+
+WORKDIR /app
+
+# Install build dependencies including PostgreSQL dev libraries
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 # Production stage
 FROM python:3.12-slim
 
 WORKDIR /app
+
+# Install PostgreSQL client libraries
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy installed packages from builder
 COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages

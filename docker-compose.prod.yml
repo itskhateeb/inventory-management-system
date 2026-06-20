@@ -1,57 +1,65 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: inventory_postgres_prod
+    container_name: inventory_postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: inventory_db
+    ports:
+      - "5432:5432"
     volumes:
-      - postgres_data_prod:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - inventory_network_prod
-    restart: unless-stopped
+      - inventory_network
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.prod
-    container_name: inventory_backend_prod
+      dockerfile: Dockerfile
+    container_name: inventory_backend
     environment:
       DATABASE_URL: postgresql://postgres:password@postgres:5432/inventory_db
       APP_NAME: Inventory Management System
-      DEBUG: "False"
+      DEBUG: "True"
       API_V1_PREFIX: /api/v1
     ports:
       - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./backend:/app
     networks:
-      - inventory_network_prod
-    restart: unless-stopped
+      - inventory_network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.prod
-    container_name: inventory_frontend_prod
+      dockerfile: Dockerfile
+    container_name: inventory_frontend
+    environment:
+      VITE_API_URL: http://localhost:8000
     ports:
-      - "80:80"
+      - "5173:5173"
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     networks:
-      - inventory_network_prod
-    restart: unless-stopped
+      - inventory_network
+    command: npm run dev -- --host 0.0.0.0
 
 networks:
-  inventory_network_prod:
+  inventory_network:
     driver: bridge
 
 volumes:
-  postgres_data_prod:
+  postgres_data:
