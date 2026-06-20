@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .config import settings
 from .database import engine, Base
-from . import models  # Import models to ensure they're registered
+from . import models
+from .routers import products_router
 
 # Create FastAPI application
 app = FastAPI(
@@ -21,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include routers
+app.include_router(products_router)
 
 
 @app.on_event("startup")

@@ -34,6 +34,7 @@ class ProductCreate(ProductBase):
 class ProductUpdate(BaseModel):
     """Schema for updating an existing Product."""
     name: Optional[str] = Field(None, min_length=1, max_length=255)
+    sku: Optional[str] = Field(None, min_length=1, max_length=100)
     price: Optional[Decimal] = Field(None, gt=0)
     stock_quantity: Optional[int] = Field(None, ge=0)
 
@@ -42,6 +43,12 @@ class ProductUpdate(BaseModel):
         if v is not None and not v.strip():
             raise ValueError('Name cannot be empty or whitespace only')
         return v.strip() if v else v
+
+    @field_validator('sku')
+    def validate_sku(cls, v):
+        if v is not None and not v.strip():
+            raise ValueError('SKU cannot be empty or whitespace only')
+        return v.upper().strip() if v else v
 
 
 class ProductResponse(ProductBase):
@@ -52,12 +59,18 @@ class ProductResponse(ProductBase):
     created_at: datetime
 
 
+class ProductListResponse(BaseModel):
+    """Schema for list of Products response."""
+    items: List[ProductResponse]
+    total: int
+
+
 # ==================== Customer Schemas ====================
 
 class CustomerBase(BaseModel):
     """Base schema for Customer."""
     full_name: str = Field(..., min_length=1, max_length=255, description="Customer's full name")
-    email: str = Field(..., pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', description="Customer's email (unique)")
+    email: EmailStr = Field(..., description="Customer's email (unique)")
     phone: Optional[str] = Field(None, max_length=20, description="Customer's phone number")
 
     @field_validator('full_name')
@@ -75,7 +88,7 @@ class CustomerCreate(CustomerBase):
 class CustomerUpdate(BaseModel):
     """Schema for updating an existing Customer."""
     full_name: Optional[str] = Field(None, min_length=1, max_length=255)
-    email: Optional[str] = Field(None, pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    email: Optional[EmailStr] = None
     phone: Optional[str] = Field(None, max_length=20)
 
     @field_validator('full_name')
@@ -91,6 +104,12 @@ class CustomerResponse(CustomerBase):
 
     id: int
     created_at: datetime
+
+
+class CustomerListResponse(BaseModel):
+    """Schema for list of Customers response."""
+    items: List[CustomerResponse]
+    total: int
 
 
 # ==================== Order Schemas ====================
@@ -117,6 +136,11 @@ class OrderItemResponse(BaseModel):
     price_at_purchase: Decimal
 
 
+class OrderItemDetailResponse(OrderItemResponse):
+    """Schema for Order Item with product details."""
+    product: Optional[ProductResponse] = None
+
+
 class OrderBase(BaseModel):
     """Base schema for Order."""
     customer_id: int = Field(..., gt=0, description="ID of the customer")
@@ -141,6 +165,12 @@ class OrderResponse(BaseModel):
 class OrderDetailResponse(OrderResponse):
     """Schema for detailed Order response with customer info."""
     customer: Optional[CustomerResponse] = None
+
+
+class OrderListResponse(BaseModel):
+    """Schema for list of Orders response."""
+    items: List[OrderResponse]
+    total: int
 
 
 # ==================== Dashboard Schemas ====================
