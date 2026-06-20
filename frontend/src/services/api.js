@@ -40,4 +40,21 @@ export const customerApi = {
   deleteCustomer: (id) => api.delete(`/customers/${id}`),
 };
 
+// Order API calls
+export const orderApi = {
+  getOrders: (params = {}) => {
+    const { skip = 0, limit = 100, customer_id } = params;
+    let url = `/orders?skip=${skip}&limit=${limit}`;
+    if (customer_id) url += `&customer_id=${customer_id}`;
+    return api.get(url);
+  },
+  getOrder: (id) => api.get(`/orders/${id}`),
+  createOrder: (data) => api.post('/orders', data),
+  deleteOrder: (id) => api.delete(`/orders/${id}`),
+  getCustomerOrders: (customerId, params = {}) => {
+    const { skip = 0, limit = 100 } = params;
+    return api.get(`/orders/customer/${customerId}/?skip=${skip}&limit=${limit}`);
+  },
+};
+
 export default api;
