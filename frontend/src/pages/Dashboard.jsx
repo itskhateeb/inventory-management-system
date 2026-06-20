@@ -12,7 +12,7 @@ import {
 
 const StatCard = ({ title, value, icon, color, link, subtitle }) => (
   <div className="col-md-3 col-sm-6 mb-3">
-    <div className={`card bg-${color} text-white h-100 shadow-sm stat-card`}>
+    <div className={`card bg-₹{color} text-white h-100 shadow-sm stat-card`}>
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-start">
           <div>
@@ -147,7 +147,7 @@ const Dashboard = () => {
           icon="box"
           color="primary"
           link="/products"
-          subtitle={`${stats.total_products} items in inventory`}
+          subtitle={`₹{stats.total_products} items in inventory`}
         />
 
         <StatCard
@@ -156,7 +156,7 @@ const Dashboard = () => {
           icon="users"
           color="success"
           link="/customers"
-          subtitle={`${stats.total_customers} registered customers`}
+          subtitle={`₹{stats.total_customers} registered customers`}
         />
 
         <StatCard
@@ -165,7 +165,7 @@ const Dashboard = () => {
           icon="cart"
           color="info"
           link="/orders"
-          subtitle={`${stats.total_orders} orders placed`}
+          subtitle={`₹{stats.total_orders} orders placed`}
         />
 
         <StatCard
@@ -227,7 +227,7 @@ const Dashboard = () => {
 
                           <td>
                             <span
-                              className={`badge ${
+                              className={`badge ₹{
                                 product.stock_quantity === 0
                                   ? 'bg-danger'
                                   : 'bg-warning'
@@ -239,7 +239,7 @@ const Dashboard = () => {
 
                           <td>
                             <Link
-                              to={`/products/edit/${product.id}`}
+                              to={`/products/edit/₹{product.id}`}
                               className="btn btn-sm btn-outline-primary"
                             >
                               Update
@@ -302,7 +302,7 @@ const Dashboard = () => {
                           <td className="fw-semibold">#{order.id}</td>
                           <td>Customer #{order.customer_id}</td>
                           <td className="fw-bold">
-                            ${Number(order.total_amount).toFixed(2)}
+                            ₹{Number(order.total_amount).toFixed(2)}
                           </td>
                           <td>
                             <span className="badge bg-success">

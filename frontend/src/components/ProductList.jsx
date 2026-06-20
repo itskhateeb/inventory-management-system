@@ -127,7 +127,7 @@ const ProductList = () => {
                   <td>{product.id}</td>
                   <td>{product.name}</td>
                   <td>{product.sku}</td>
-                  <td>${Number(product.price).toFixed(2)}</td>
+                  <td>₹{Number(product.price).toFixed(2)}</td>
                   <td>
                     {product.stock_quantity}
                     {product.stock_quantity < 10 && (

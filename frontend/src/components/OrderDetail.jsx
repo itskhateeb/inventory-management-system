@@ -84,7 +84,7 @@ const OrderDetail = () => {
             <div className="col-md-6">
               <p><strong>Order ID:</strong> #{order.id}</p>
               <p><strong>Customer ID:</strong> {order.customer_id}</p>
-              <p><strong>Total Amount:</strong> ${Number(order.total_amount).toFixed(2)}</p>
+              <p><strong>Total Amount:</strong> ₹{Number(order.total_amount).toFixed(2)}</p>
             </div>
             <div className="col-md-6">
               <p><strong>Created:</strong> {new Date(order.created_at).toLocaleString()}</p>
@@ -118,15 +118,15 @@ const OrderDetail = () => {
                 <td>{item.id}</td>
                 <td>{item.product_id}</td>
                 <td>{item.quantity}</td>
-                <td>${Number(item.price_at_purchase).toFixed(2)}</td>
-                <td>${(Number(item.price_at_purchase) * item.quantity).toFixed(2)}</td>
+                <td>₹{Number(item.price_at_purchase).toFixed(2)}</td>
+                <td>₹{(Number(item.price_at_purchase) * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
           <tfoot>
             <tr>
               <td colSpan="4" className="text-end"><strong>Total:</strong></td>
-              <td><strong>${Number(order.total_amount).toFixed(2)}</strong></td>
+              <td><strong>₹{Number(order.total_amount).toFixed(2)}</strong></td>
             </tr>
           </tfoot>
         </table>
