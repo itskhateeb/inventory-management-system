@@ -1,5 +1,9 @@
+/* ============================================
+   ROOT VARIABLES
+   ============================================ */
 :root {
   --primary-color: #0d6efd;
+  --primary-dark: #0b5ed7;
   --secondary-color: #6c757d;
   --success-color: #198754;
   --danger-color: #dc3545;
@@ -7,28 +11,166 @@
   --info-color: #0dcaf0;
   --light-color: #f8f9fa;
   --dark-color: #212529;
+  
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-family);
+  background: #f0f2f5;
+  color: var(--dark-color);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f9fa;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Print styles */
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-muted {
+  color: var(--secondary-color) !important;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
 @media print {
   .btn,
   .navbar {
@@ -38,5 +180,6 @@ code {
   .card {
     box-shadow: none !important;
     border: 1px solid #dee2e6 !important;
+    break-inside: avoid;
   }
 }
