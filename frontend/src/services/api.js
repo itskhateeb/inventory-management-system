@@ -57,4 +57,14 @@ export const orderApi = {
   },
 };
 
+// Dashboard API calls
+export const dashboardApi = {
+  getStats: (params = {}) => {
+    const { low_stock_threshold = 10, recent_orders_limit = 5 } = params;
+    return api.get(`/dashboard/stats?low_stock_threshold=${low_stock_threshold}&recent_orders_limit=${recent_orders_limit}`);
+  },
+  getLowStock: (threshold = 10) => api.get(`/dashboard/low-stock?threshold=${threshold}`),
+  getRecentOrders: (limit = 5) => api.get(`/dashboard/recent-orders?limit=${limit}`),
+};
+
 export default api;

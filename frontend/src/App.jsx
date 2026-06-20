@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Customers from './pages/Customers';
 import Orders from './pages/Orders';
@@ -13,7 +14,7 @@ function App() {
         <Navigation />
         <div className="container-fluid mt-3">
           <Routes>
-            <Route path="/" element={<div className="text-center py-5"><h1>Welcome to Inventory Management System</h1><p className="text-muted">Select a module from the navigation above</p></div>} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/customers/*" element={<Customers />} />
             <Route path="/orders/*" element={<Orders />} />
