@@ -18,8 +18,12 @@ class Settings(BaseSettings):
     DEBUG: bool = os.getenv("DEBUG", "True").lower() == "true"
     API_V1_PREFIX: str = os.getenv("API_V1_PREFIX", "/api/v1")
     
-    # CORS
-    BACKEND_CORS_ORIGINS: list = ["http://localhost:5173", "http://localhost:3000"]
+# CORS
+    BACKEND_CORS_ORIGINS: list = [
+        "http://localhost:5173", 
+        "http://localhost:5174",
+        "http://localhost:3000"
+]
     
     class Config:
         env_file = ".env"

@@ -86,7 +86,7 @@ const OrderList = () => {
                 <tr key={order.id}>
                   <td>#{order.id}</td>
                   <td>{order.customer_id}</td>
-                  <td>${Number(order.total_amount).toFixed(2)}</td>
+                  <td>₹{Number(order.total_amount).toFixed(2)}</td>
                   <td>{order.items?.length || 0}</td>
                   <td>{new Date(order.created_at).toLocaleString()}</td>
                   <td>
