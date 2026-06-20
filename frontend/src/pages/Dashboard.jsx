@@ -7,9 +7,10 @@ import {
   FaExclamationTriangle, 
   FaArrowRight,
   FaCheckCircle,
-  FaCalendarAlt
+  FaCalendarAlt,
+  FaChartLine
 } from 'react-icons/fa';
-import { MdInventory, MdWarning } from 'react-icons/md';
+import { MdInventory } from 'react-icons/md';
 import { dashboardApi } from '../services/api';
 
 const Dashboard = () => {
@@ -113,17 +114,22 @@ const Dashboard = () => {
   return (
     <div>
       {/* Welcome Section */}
-      <div className="welcome-section mb-4">
+      <div className="welcome-section creative-welcome mb-4">
         <div className="d-flex justify-content-between align-items-center flex-wrap">
-          <div>
-            <h1 className="display-6 fw-bold mb-0 d-flex align-items-center">
-              <FaCalendarAlt className="me-3 text-primary" />
-              Dashboard
-            </h1>
-            <p className="text-muted mb-0">Manage your products, customers, and orders efficiently.</p>
+          <div className="d-flex align-items-center">
+            <div className="welcome-icon-wrapper">
+              <FaChartLine className="welcome-icon" />
+            </div>
+            <div className="ms-3">
+              <h1 className="display-6 fw-bold mb-0 creative-dashboard-title">
+                <span className="title-highlight">Dashboard</span> Overview
+              </h1>
+              <p className="text-muted mb-0">Get a real-time snapshot of your business performance</p>
+            </div>
           </div>
           <div className="mt-2 mt-sm-0">
-            <span className="badge bg-primary rounded-pill py-2 px-3">
+            <span className="badge bg-primary rounded-pill py-2 px-3 date-badge">
+              <FaCalendarAlt className="me-2" />
               {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
           </div>
@@ -170,7 +176,7 @@ const Dashboard = () => {
       <div className="row mt-4">
         {/* Low Stock Products */}
         <div className="col-md-6 mb-4">
-          <div className="card shadow-sm h-100">
+          <div className="card shadow-sm h-100 creative-card">
             <div className="card-header bg-warning d-flex justify-content-between align-items-center">
               <h5 className="mb-0 d-flex align-items-center">
                 <FaExclamationTriangle className="me-2" />
@@ -231,7 +237,7 @@ const Dashboard = () => {
 
         {/* Recent Orders */}
         <div className="col-md-6 mb-4">
-          <div className="card shadow-sm h-100">
+          <div className="card shadow-sm h-100 creative-card">
             <div className="card-header bg-info text-white d-flex justify-content-between align-items-center">
               <h5 className="mb-0 d-flex align-items-center">
                 <FaShoppingCart className="me-2" />
