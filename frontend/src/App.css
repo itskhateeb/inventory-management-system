@@ -436,3 +436,190 @@ h5 {
   background-color: #cff4fc;
   color: #055160;
 }
+
+/* Professional icon styling */
+.nav-link svg {
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.navbar-brand svg {
+  vertical-align: middle;
+}
+
+.stat-card {
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card .display-4 {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* Card improvements */
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1rem 1.25rem;
+}
+
+/* Welcome section */
+.welcome-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 4px solid #0d6efd;
+}
+
+/* Button enhancements */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.6rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  border: none;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #198754, #157347);
+  border: none;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #bb2d3b);
+  border: none;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107, #ffb300);
+  border: none;
+  color: #212529;
+}
+
+/* Form enhancements */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  padding: 0.6rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.form-control-lg {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+}
+
+/* Table enhancements */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+  color: #495057;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* Badge enhancements */
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+/* Toast notifications - simple CSS version */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.toast-message {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease;
+}
+
+.toast-success {
+  background: linear-gradient(135deg, #198754, #157347);
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #dc3545, #bb2d3b);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stat-card .display-4 {
+    font-size: 2rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    padding: 0.4rem 1rem;
+  }
+}
