@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { productApi } from '../services/api';
 
 const ProductForm = () => {
@@ -15,7 +16,6 @@ const ProductForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     if (isEdit) {
@@ -35,7 +35,7 @@ const ProductForm = () => {
         stock_quantity: product.stock_quantity
       });
     } catch (err) {
-      setError('Failed to load product');
+      toast.error('Failed to load product');
     } finally {
       setLoading(false);
     }
@@ -52,23 +52,21 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
 
-    // Validate
     if (!formData.name.trim()) {
-      setError('Product name is required');
+      toast.error('Product name is required');
       return;
     }
     if (!formData.sku.trim()) {
-      setError('SKU is required');
+      toast.error('SKU is required');
       return;
     }
     if (!formData.price || parseFloat(formData.price) <= 0) {
-      setError('Price must be greater than 0');
+      toast.error('Price must be greater than 0');
       return;
     }
     if (!formData.stock_quantity || parseInt(formData.stock_quantity) < 0) {
-      setError('Stock quantity must be 0 or greater');
+      toast.error('Stock quantity must be 0 or greater');
       return;
     }
 
@@ -83,10 +81,10 @@ const ProductForm = () => {
 
       if (isEdit) {
         await productApi.updateProduct(id, data);
-        setSuccess('Product updated successfully!');
+        toast.success('Product updated successfully!');
       } else {
         await productApi.createProduct(data);
-        setSuccess('Product created successfully!');
+        toast.success('Product created successfully!');
         setFormData({ name: '', sku: '', price: '', stock_quantity: '' });
       }
 
@@ -94,11 +92,9 @@ const ProductForm = () => {
         navigate('/products');
       }, 1500);
     } catch (err) {
-      if (err.response?.data?.detail) {
-        setError(err.response.data.detail);
-      } else {
-        setError('Failed to save product');
-      }
+      const message = err.response?.data?.detail || 'Failed to save product';
+      toast.error(message);
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -111,7 +107,7 @@ const ProductForm = () => {
   return (
     <div className="card shadow">
       <div className="card-header bg-primary text-white">
-        <h4 className="mb-0">{isEdit ? 'Edit Product' : 'Add New Product'}</h4>
+        <h4 className="mb-0">{isEdit ? '✏️ Edit Product' : '➕ Add New Product'}</h4>
       </div>
       <div className="card-body">
         {error && (
@@ -119,18 +115,13 @@ const ProductForm = () => {
             {error}
           </div>
         )}
-        {success && (
-          <div className="alert alert-success" role="alert">
-            {success}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">Product Name *</label>
+            <label htmlFor="name" className="form-label fw-bold">Product Name *</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control form-control-lg"
               id="name"
               name="name"
               value={formData.name}
@@ -141,10 +132,10 @@ const ProductForm = () => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="sku" className="form-label">SKU *</label>
+            <label htmlFor="sku" className="form-label fw-bold">SKU *</label>
             <input
               type="text"
-              className="form-control"
+              className="form-control form-control-lg"
               id="sku"
               name="sku"
               value={formData.sku}
@@ -154,53 +145,61 @@ const ProductForm = () => {
               disabled={isEdit}
             />
             {isEdit && (
-              <small className="text-muted">SKU cannot be changed after creation</small>
+              <small className="text-muted">🔒 SKU cannot be changed after creation</small>
             )}
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="price" className="form-label">Price *</label>
-            <input
-              type="number"
-              className="form-control"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-              placeholder="0.00"
-              step="0.01"
-              min="0.01"
-              required
-            />
+          <div className="row">
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor="price" className="form-label fw-bold">Price *</label>
+                <div className="input-group">
+                  <span className="input-group-text">$</span>
+                  <input
+                    type="number"
+                    className="form-control form-control-lg"
+                    id="price"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleChange}
+                    placeholder="0.00"
+                    step="0.01"
+                    min="0.01"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label htmlFor="stock_quantity" className="form-label fw-bold">Stock Quantity *</label>
+                <input
+                  type="number"
+                  className="form-control form-control-lg"
+                  id="stock_quantity"
+                  name="stock_quantity"
+                  value={formData.stock_quantity}
+                  onChange={handleChange}
+                  placeholder="0"
+                  step="1"
+                  min="0"
+                  required
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="stock_quantity" className="form-label">Stock Quantity *</label>
-            <input
-              type="number"
-              className="form-control"
-              id="stock_quantity"
-              name="stock_quantity"
-              value={formData.stock_quantity}
-              onChange={handleChange}
-              placeholder="0"
-              step="1"
-              min="0"
-              required
-            />
-          </div>
-
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 mt-3">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary btn-lg px-4"
               disabled={loading}
             >
               {loading ? 'Saving...' : (isEdit ? 'Update Product' : 'Create Product')}
             </button>
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-secondary btn-lg px-4"
               onClick={() => navigate('/products')}
             >
               Cancel

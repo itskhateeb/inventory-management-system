@@ -50,7 +50,7 @@ const Dashboard = () => {
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
-        <p className="mt-3">Loading dashboard...</p>
+        <p className="mt-3 text-muted">Loading dashboard...</p>
       </div>
     );
   }
@@ -63,20 +63,21 @@ const Dashboard = () => {
     );
   }
 
-  const StatCard = ({ title, value, icon, color, link }) => (
+  const StatCard = ({ title, value, icon, color, link, subtitle }) => (
     <div className="col-md-3 col-sm-6 mb-3">
-      <div className={`card text-white bg-${color} h-100`}>
+      <div className={`card bg-${color} text-white h-100 shadow-sm stat-card`}>
         <div className="card-body">
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex justify-content-between align-items-start">
             <div>
-              <h6 className="card-title text-uppercase">{title}</h6>
-              <h2 className="mb-0">{value}</h2>
+              <h6 className="card-title text-uppercase opacity-75 mb-1">{title}</h6>
+              <h2 className="mb-0 display-5 fw-bold">{value}</h2>
+              {subtitle && <small className="opacity-75">{subtitle}</small>}
             </div>
             <div className="display-4 opacity-50">{icon}</div>
           </div>
           {link && (
-            <div className="mt-2">
-              <Link to={link} className="text-white text-decoration-none">
+            <div className="mt-3">
+              <Link to={link} className="text-white text-decoration-none opacity-75 hover-opacity-100">
                 View Details →
               </Link>
             </div>
@@ -88,8 +89,24 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2 className="mb-4">Dashboard</h2>
+      {/* Welcome Section */}
+      <div className="mb-4 fade-in">
+        <div className="p-4 bg-light rounded-3 shadow-sm border-start border-primary border-4">
+          <div className="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+              <h1 className="display-6 fw-bold mb-0">📊 Dashboard</h1>
+              <p className="text-muted mb-0">Manage your products, customers, and orders efficiently.</p>
+            </div>
+            <div className="mt-2 mt-sm-0">
+              <span className="badge bg-primary rounded-pill py-2 px-3">
+                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
       
+      {/* Statistics Cards */}
       <div className="row">
         <StatCard 
           title="Total Products" 
@@ -97,6 +114,7 @@ const Dashboard = () => {
           icon="📦" 
           color="primary"
           link="/products"
+          subtitle={`${stats.total_products} items in inventory`}
         />
         <StatCard 
           title="Total Customers" 
@@ -104,6 +122,7 @@ const Dashboard = () => {
           icon="👥" 
           color="success"
           link="/customers"
+          subtitle={`${stats.total_customers} registered customers`}
         />
         <StatCard 
           title="Total Orders" 
@@ -111,43 +130,59 @@ const Dashboard = () => {
           icon="📋" 
           color="info"
           link="/orders"
+          subtitle={`${stats.total_orders} orders placed`}
         />
         <StatCard 
           title="Low Stock Items" 
           value={stats.low_stock_count} 
           icon="⚠️" 
-          color="warning"
+          color={stats.low_stock_count > 0 ? "warning" : "secondary"}
           link="/products"
+          subtitle={stats.low_stock_count > 0 ? "Needs attention!" : "All stocked up!"}
         />
       </div>
 
+      {/* Low Stock and Recent Orders Section */}
       <div className="row mt-4">
         {/* Low Stock Products */}
         <div className="col-md-6 mb-4">
-          <div className="card shadow-sm">
-            <div className="card-header bg-warning">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-warning d-flex justify-content-between align-items-center">
               <h5 className="mb-0">⚠️ Low Stock Products</h5>
+              {lowStockProducts.length > 0 && (
+                <span className="badge bg-danger rounded-pill">{lowStockProducts.length}</span>
+              )}
             </div>
             <div className="card-body">
               {lowStockProducts.length === 0 ? (
-                <p className="text-muted">No low stock products</p>
+                <div className="text-center py-4">
+                  <p className="text-success mb-0">✅ All products have sufficient stock</p>
+                </div>
               ) : (
                 <div className="table-responsive">
-                  <table className="table table-sm table-striped">
+                  <table className="table table-sm table-hover mb-0">
                     <thead>
                       <tr>
                         <th>Name</th>
                         <th>SKU</th>
                         <th>Stock</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {lowStockProducts.slice(0, 5).map((product) => (
                         <tr key={product.id}>
-                          <td>{product.name}</td>
-                          <td>{product.sku}</td>
+                          <td className="fw-semibold">{product.name}</td>
+                          <td><code>{product.sku}</code></td>
                           <td>
-                            <span className="badge bg-danger">{product.stock_quantity}</span>
+                            <span className={`badge ${product.stock_quantity === 0 ? 'bg-danger' : 'bg-warning'}`}>
+                              {product.stock_quantity}
+                            </span>
+                          </td>
+                          <td>
+                            <Link to={`/products/edit/${product.id}`} className="btn btn-sm btn-outline-primary">
+                              Update
+                            </Link>
                           </td>
                         </tr>
                       ))}
@@ -156,9 +191,11 @@ const Dashboard = () => {
                 </div>
               )}
               {lowStockProducts.length > 5 && (
-                <Link to="/products" className="btn btn-sm btn-outline-primary mt-2">
-                  View all low stock products
-                </Link>
+                <div className="mt-3 text-center">
+                  <Link to="/products" className="btn btn-sm btn-outline-primary">
+                    View all {lowStockProducts.length} low stock products
+                  </Link>
+                </div>
               )}
             </div>
           </div>
@@ -166,29 +203,38 @@ const Dashboard = () => {
 
         {/* Recent Orders */}
         <div className="col-md-6 mb-4">
-          <div className="card shadow-sm">
-            <div className="card-header bg-info text-white">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-info text-white d-flex justify-content-between align-items-center">
               <h5 className="mb-0">📋 Recent Orders</h5>
+              {recentOrders.length > 0 && (
+                <span className="badge bg-light text-dark rounded-pill">{recentOrders.length}</span>
+              )}
             </div>
             <div className="card-body">
               {recentOrders.length === 0 ? (
-                <p className="text-muted">No recent orders</p>
+                <div className="text-center py-4">
+                  <p className="text-muted mb-0">No recent orders</p>
+                </div>
               ) : (
                 <div className="table-responsive">
-                  <table className="table table-sm table-striped">
+                  <table className="table table-sm table-hover mb-0">
                     <thead>
                       <tr>
                         <th>Order ID</th>
                         <th>Customer</th>
                         <th>Total</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       {recentOrders.map((order) => (
                         <tr key={order.id}>
-                          <td>#{order.id}</td>
+                          <td className="fw-semibold">#{order.id}</td>
                           <td>Customer #{order.customer_id}</td>
-                          <td>${Number(order.total_amount).toFixed(2)}</td>
+                          <td className="fw-bold">${Number(order.total_amount).toFixed(2)}</td>
+                          <td>
+                            <span className="badge bg-success">Completed</span>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -196,9 +242,11 @@ const Dashboard = () => {
                 </div>
               )}
               {recentOrders.length > 0 && (
-                <Link to="/orders" className="btn btn-sm btn-outline-primary mt-2">
-                  View all orders
-                </Link>
+                <div className="mt-3 text-center">
+                  <Link to="/orders" className="btn btn-sm btn-outline-primary">
+                    View all orders
+                  </Link>
+                </div>
               )}
             </div>
           </div>

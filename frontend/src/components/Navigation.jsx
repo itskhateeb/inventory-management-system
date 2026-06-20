@@ -9,10 +9,10 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Inventory System
+        <Link className="navbar-brand fw-bold fs-4" to="/">
+          📦 Inventory System
         </Link>
         <button
           className="navbar-toggler"
@@ -26,22 +26,22 @@ const Navigation = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link className={`nav-link ${isActive('/')}`} to="/">
-                Dashboard
+                <span className="me-1">📊</span> Dashboard
               </Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${isActive('/products')}`} to="/products">
-                Products
+                <span className="me-1">📦</span> Products
               </Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${isActive('/customers')}`} to="/customers">
-                Customers
+                <span className="me-1">👥</span> Customers
               </Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link ${isActive('/orders')}`} to="/orders">
-                Orders
+                <span className="me-1">📋</span> Orders
               </Link>
             </li>
           </ul>
