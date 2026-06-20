@@ -1,17 +1,26 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
+import { FaShoppingCart, FaPlus } from 'react-icons/fa';
 import OrderList from '../components/OrderList';
 import OrderForm from '../components/OrderForm';
 import OrderDetail from '../components/OrderDetail';
 
 const Orders = () => {
   return (
-    <div className="container-fluid mt-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Order Management</h2>
-        <Link to="/orders/new" className="btn btn-success">
-          Create New Order
-        </Link>
+    <div>
+      <div className="page-header">
+        <div>
+          <h2>
+            <FaShoppingCart className="header-icon" />
+            Order Management
+          </h2>
+          <div className="subtitle">Track and manage customer orders</div>
+        </div>
+        <div className="header-actions">
+          <Link to="/orders/new" className="btn btn-success">
+            <FaPlus className="me-1" /> Create New Order
+          </Link>
+        </div>
       </div>
 
       <Routes>

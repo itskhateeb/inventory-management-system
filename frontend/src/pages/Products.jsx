@@ -1,16 +1,25 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
+import { FaBox, FaPlus } from 'react-icons/fa';
 import ProductList from '../components/ProductList';
 import ProductForm from '../components/ProductForm';
 
 const Products = () => {
   return (
-    <div className="container-fluid mt-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Product Management</h2>
-        <Link to="/products/new" className="btn btn-primary">
-          Add New Product
-        </Link>
+    <div>
+      <div className="page-header">
+        <div>
+          <h2>
+            <FaBox className="header-icon" />
+            Product Management
+          </h2>
+          <div className="subtitle">Manage your product inventory</div>
+        </div>
+        <div className="header-actions">
+          <Link to="/products/new" className="btn btn-primary">
+            <FaPlus className="me-1" /> Add New Product
+          </Link>
+        </div>
       </div>
 
       <Routes>

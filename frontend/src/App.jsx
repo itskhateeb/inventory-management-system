@@ -12,14 +12,14 @@ function App() {
     <Router>
       <div className="App">
         <Navigation />
-        <div className="container-fluid mt-3">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products/*" element={<Products />} />
             <Route path="/customers/*" element={<Customers />} />
             <Route path="/orders/*" element={<Orders />} />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );
