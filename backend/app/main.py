@@ -53,8 +53,20 @@ async def root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
-    return {
-        "status": "healthy",
-        "service": settings.APP_NAME,
-        "database": "connected"
-    }
+    try:
+        # Try to connect to database
+        from .database import engine
+        with engine.connect() as conn:
+            conn.execute("SELECT 1")
+        return {
+            "status": "healthy",
+            "service": settings.APP_NAME,
+            "database": "connected"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "service": settings.APP_NAME,
+            "database": "disconnected",
+            "error": str(e)
+        }
