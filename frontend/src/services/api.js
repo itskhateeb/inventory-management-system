@@ -14,7 +14,7 @@ export const productApi = {
   // Get all products with pagination and filters
   getProducts: (params = {}) => {
     const { skip = 0, limit = 100, search = '', minPrice, maxPrice } = params;
-    let url = `/products?skip=${skip}&limit=${limit}`;
+    let url = `/products/?skip=${skip}&limit=${limit}`;
     if (search) url += `&search=${search}`;
     if (minPrice) url += `&min_price=${minPrice}`;
     if (maxPrice) url += `&max_price=${maxPrice}`;
@@ -42,7 +42,7 @@ export const customerApi = {
   // Get all customers with pagination and search
   getCustomers: (params = {}) => {
     const { skip = 0, limit = 100, search = '' } = params;
-    let url = `/customers?skip=${skip}&limit=${limit}`;
+    let url = `/customers/?skip=${skip}&limit=${limit}`;
     if (search) url += `&search=${search}`;
     return api.get(url);
   },
@@ -65,7 +65,7 @@ export const orderApi = {
   // Get all orders with pagination
   getOrders: (params = {}) => {
     const { skip = 0, limit = 100, customer_id } = params;
-    let url = `/orders?skip=${skip}&limit=${limit}`;
+    let url = `/orders/?skip=${skip}&limit=${limit}`;
     if (customer_id) url += `&customer_id=${customer_id}`;
     return api.get(url);
   },
