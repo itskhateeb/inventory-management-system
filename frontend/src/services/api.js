@@ -25,7 +25,7 @@ export const productApi = {
   getProduct: (id) => api.get(`/products/${id}`),
 
   // Create product
-  createProduct: (data) => api.post('/products', data),
+  createProduct: (data) => api.post('/products/', data),
 
   // Update product
   updateProduct: (id, data) => api.put(`/products/${id}`, data),
