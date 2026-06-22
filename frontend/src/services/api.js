@@ -51,14 +51,14 @@ export const customerApi = {
   getCustomer: (id) => api.get(`/customers/${id}`),
 
   // Create customer
-  createCustomer: (data) => api.post('/customers', data),
+    createCustomer: (data) => api.post('/customers/', data),
 
-  // Update customer
-  updateCustomer: (id, data) => api.put(`/customers/${id}`, data),
+// Update customer
+    updateCustomer: (id, data) => api.put(`/customers/${id}/`, data),
 
-  // Delete customer
-  deleteCustomer: (id) => api.delete(`/customers/${id}`),
-};
+// Delete customer
+    deleteCustomer: (id) => api.delete(`/customers/${id}/`),
+}
 
 // Order API calls
 export const orderApi = {
