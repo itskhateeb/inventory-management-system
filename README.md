@@ -1,332 +1,364 @@
 # 📦 Inventory & Order Management System
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688.svg)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB.svg)](https://reactjs.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791.svg)](https://www.postgresql.org/)
-[![Docker](https://img.shields.io/badge/Docker-24.0.7-2496ED.svg)](https://www.docker.com/)
-[![Railway](https://img.shields.io/badge/Railway-Deployed-0B0D0E.svg)](https://railway.app/)
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000.svg)](https://vercel.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.138-green)
+![React](https://img.shields.io/badge/React-18-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)
+![Railway](https://img.shields.io/badge/Backend-Railway-purple)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-black)
 
-> A production-ready, full-stack Inventory & Order Management System built with FastAPI, React, and PostgreSQL. Fully containerized and deployed on Railway & Vercel.
-
----
-
-## 🚀 Live Demo
-
-| Service | URL |
-|---------|-----|
-| **Frontend Application** | [https://your-project.vercel.app](https://your-project.vercel.app) |
-| **Backend API** | [https://your-app-name.up.railway.app](https://your-app-name.up.railway.app) |
-| **API Documentation** | [https://your-app-name.up.railway.app/docs](https://your-app-name.up.railway.app/docs) |
-| **Health Check** | [https://your-app-name.up.railway.app/health](https://your-app-name.up.railway.app/health) |
+A production-ready full-stack Inventory & Order Management System built using FastAPI, React, PostgreSQL, Docker, Railway, and Vercel. The system provides complete inventory tracking, customer management, order processing, stock monitoring, and business analytics through a responsive and modern user interface.
 
 ---
 
-## 📋 Table of Contents
+## 🚀 Live Deployment
 
-- [Overview](#overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [System Architecture](#system-architecture)
-- [API Documentation](#api-documentation)
-- [Business Rules](#business-rules)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Local Development](#local-development)
-  - [Docker Setup](#docker-setup)
-- [Deployment](#deployment)
-- [Project Structure](#project-structure)
-- [Environment Variables](#environment-variables)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+| Service              | URL                                                                       |
+| -------------------- | ------------------------------------------------------------------------- |
+| Frontend Application | https://inventory-management-system-9kynhwb0m-khateeb.vercel.app          |
+| Backend API          | https://inventory-management-system-production-eb67.up.railway.app        |
+| API Documentation    | https://inventory-management-system-production-eb67.up.railway.app/docs   |
+| Health Check         | https://inventory-management-system-production-eb67.up.railway.app/health |
+| Docker Hub Image     | https://hub.docker.com/r/khateeb07/inventory-management-system-backend    |
+| GitHub Repository    | https://github.com/itskhateeb/inventory-management-system                 |
 
 ---
 
 ## 📖 Overview
 
-The **Inventory & Order Management System** is a comprehensive solution designed to help businesses efficiently manage their products, customers, orders, and inventory tracking. Built with modern technologies, this system provides a seamless experience for both administrators and end-users.
+The Inventory & Order Management System is a comprehensive business application designed to efficiently manage products, customers, and orders. It ensures data integrity through backend validations, automatic inventory updates, and real-time dashboard analytics.
 
 ### Key Highlights
 
-- ✅ **Complete CRUD Operations** for Products, Customers, and Orders
-- ✅ **Real-time Inventory Tracking** with automatic stock updates
-- ✅ **Smart Business Rules** enforcing data integrity and validation
-- ✅ **Professional Dashboard** with real-time analytics and insights
-- ✅ **Containerized Architecture** for easy deployment and scalability
-- ✅ **Responsive Design** optimized for desktop and mobile devices
+* Complete CRUD Operations
+* Real-Time Inventory Tracking
+* Customer Management System
+* Order Processing Workflow
+* Dashboard Analytics
+* RESTful API Architecture
+* Docker Containerization
+* Cloud Deployment Ready
 
 ---
 
 ## ✨ Features
 
 ### Product Management
-- ➕ Create new products with unique SKU
-- 📋 View all products with search and filter
-- ✏️ Update product details (price, stock, name)
-- 🗑️ Delete products (with order history validation)
-- 🔔 Low stock alerts and notifications
+
+* Create products with unique SKU
+* View products with pagination and search
+* Update product information
+* Delete products
+* Track inventory quantity
+* Low stock monitoring
 
 ### Customer Management
-- 👤 Create and manage customer profiles
-- 📧 Unique email validation
-- 📞 Store customer contact information
-- 📊 View customer order history
+
+* Create customer profiles
+* Email uniqueness validation
+* Store customer contact details
+* Manage customer information
+* View customer order history
 
 ### Order Management
-- 🛒 Create orders with multiple items
-- 📦 Automatic inventory deduction
-- 💰 Auto-calculate total amount
-- 📋 View order details and history
-- 🗑️ Cancel/delete orders
+
+* Create orders with multiple products
+* Automatic inventory deduction
+* Automatic total amount calculation
+* Order history tracking
+* Customer-based order retrieval
 
 ### Dashboard Analytics
-- 📊 Real-time statistics (Products, Customers, Orders)
-- ⚠️ Low stock product alerts
-- 📋 Recent orders display
-- 📈 Business performance insights
+
+* Total Products
+* Total Customers
+* Total Orders
+* Revenue Overview
+* Recent Orders
+* Low Stock Alerts
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠 Technology Stack
 
 ### Backend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Python** | 3.12 | Programming Language |
-| **FastAPI** | 0.104.1 | Web Framework |
-| **SQLAlchemy** | 2.0.51 | ORM |
-| **PostgreSQL** | 15 | Database |
-| **Pydantic** | 2.13.4 | Data Validation |
-| **Uvicorn** | 0.49.0 | ASGI Server |
-| **Alembic** | 1.18.4 | Database Migrations |
+
+| Technology | Version |
+| ---------- | ------- |
+| Python     | 3.12    |
+| FastAPI    | 0.138   |
+| SQLAlchemy | 2.0     |
+| PostgreSQL | 15      |
+| Pydantic   | 2.x     |
+| Uvicorn    | 0.49    |
+| Alembic    | 1.18    |
 
 ### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 18.3.1 | UI Library |
-| **Vite** | 8.0.16 | Build Tool |
-| **React Router** | 7.18.0 | Routing |
-| **Axios** | 1.18.0 | HTTP Client |
-| **React Icons** | Latest | Icons Library |
-| **Bootstrap** | 5.3.0 | CSS Framework |
+
+| Technology   | Version |
+| ------------ | ------- |
+| React        | 18      |
+| Vite         | Latest  |
+| React Router | Latest  |
+| Axios        | Latest  |
+| Bootstrap    | 5       |
 
 ### DevOps & Deployment
-| Technology | Purpose |
-|------------|---------|
-| **Docker** | Containerization |
-| **Docker Compose** | Service Orchestration |
-| **Railway** | Backend Hosting |
-| **Vercel** | Frontend Hosting |
-| **Neon** | Database Hosting |
-| **Git** | Version Control |
+
+| Technology      | Purpose                     |
+| --------------- | --------------------------- |
+| Docker          | Containerization            |
+| Docker Compose  | Multi-Service Orchestration |
+| Railway         | Backend Hosting             |
+| Vercel          | Frontend Hosting            |
+| Neon PostgreSQL | Database Hosting            |
+| GitHub          | Version Control             |
 
 ---
 
-## 🏗️ System Architecture
+## 🏗 System Architecture
 
+```text
+Frontend (React + Vite)
+          │
+          ▼
+     FastAPI API
+          │
+          ▼
+     SQLAlchemy ORM
+          │
+          ▼
+ PostgreSQL Database
+```
 
 ---
 
 ## 📚 API Documentation
 
-### https://inventory-management-system-production-eb67.up.railway.app
+Base URL:
 
+```text
+https://inventory-management-system-production-eb67.up.railway.app
+```
 
-### API Endpoints
+### Products
 
-#### Products
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/products` | Create a new product |
-| `GET` | `/products` | Get all products |
-| `GET` | `/products/{id}` | Get product by ID |
-| `PUT` | `/products/{id}` | Update product |
-| `DELETE` | `/products/{id}` | Delete product |
-| `GET` | `/products/low-stock/` | Get low stock products |
+| Method | Endpoint             |
+| ------ | -------------------- |
+| POST   | /products/           |
+| GET    | /products/           |
+| GET    | /products/{id}       |
+| PUT    | /products/{id}       |
+| DELETE | /products/{id}       |
+| GET    | /products/low-stock/ |
 
-#### Customers
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/customers` | Create a new customer |
-| `GET` | `/customers` | Get all customers |
-| `GET` | `/customers/{id}` | Get customer by ID |
-| `PUT` | `/customers/{id}` | Update customer |
-| `DELETE` | `/customers/{id}` | Delete customer |
+### Customers
 
-#### Orders
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/orders` | Create a new order |
-| `GET` | `/orders` | Get all orders |
-| `GET` | `/orders/{id}` | Get order by ID |
-| `DELETE` | `/orders/{id}` | Delete order |
-| `GET` | `/orders/customer/{id}/` | Get orders by customer |
+| Method | Endpoint        |
+| ------ | --------------- |
+| POST   | /customers/     |
+| GET    | /customers/     |
+| GET    | /customers/{id} |
+| PUT    | /customers/{id} |
+| DELETE | /customers/{id} |
 
-#### Dashboard
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/dashboard/stats` | Get dashboard statistics |
-| `GET` | `/dashboard/low-stock` | Get low stock products |
-| `GET` | `/dashboard/recent-orders` | Get recent orders |
+### Orders
+
+| Method | Endpoint               |
+| ------ | ---------------------- |
+| POST   | /orders/               |
+| GET    | /orders/               |
+| GET    | /orders/{id}           |
+| DELETE | /orders/{id}           |
+| GET    | /orders/customer/{id}/ |
+
+### Dashboard
+
+| Method | Endpoint                 |
+| ------ | ------------------------ |
+| GET    | /dashboard/stats         |
+| GET    | /dashboard/low-stock     |
+| GET    | /dashboard/recent-orders |
 
 ---
 
 ## ⚖️ Business Rules
 
-The system enforces the following business rules:
-
-| Rule | Implementation |
-|------|----------------|
-| **Product SKU must be unique** | ✅ Database unique constraint |
-| **Customer email must be unique** | ✅ Database unique constraint |
-| **Product stock cannot be negative** | ✅ Check constraint |
-| **Order cannot be placed with insufficient stock** | ✅ Backend validation |
-| **Order creates automatic stock reduction** | ✅ Transaction handling |
-| **Total amount calculated by backend** | ✅ Service logic |
-| **All request data validated** | ✅ Pydantic schemas |
-| **Proper HTTP status codes** | ✅ FastAPI responses |
+| Rule                              | Implementation |
+| --------------------------------- | -------------- |
+| Product SKU must be unique        | ✅              |
+| Customer email must be unique     | ✅              |
+| Product stock cannot be negative  | ✅              |
+| Orders require sufficient stock   | ✅              |
+| Automatic stock deduction         | ✅              |
+| Automatic order total calculation | ✅              |
+| Backend validation using Pydantic | ✅              |
+| Proper HTTP status codes          | ✅              |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Local Development Setup
 
-### Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- [Python 3.12+](https://www.python.org/downloads/)
-- [Node.js 20+](https://nodejs.org/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Git](https://git-scm.com/)
-- [PostgreSQL 15+](https://www.postgresql.org/) (or use Docker)
-
-### Local Development
-
-#### Clone the Repository
+### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/inventory-management-system.git
-cd inventory-management-system
+git clone https://github.com/itskhateeb/inventory-management-system.git
 
-# Navigate to backend directory
+cd inventory-management-system
+```
+
+### Backend Setup
+
+```bash
 cd backend
 
-# Create virtual environment
 python -m venv venv
 
-# Activate virtual environment
-# Windows:
+# Windows
 venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
 
-# Install dependencies
 pip install -r requirements.txt
 
-# Create .env file
-cp .env.example .env
-
-# Update DATABASE_URL in .env file
-# DATABASE_URL=postgresql://postgres:password@localhost:5432/inventory_db
-
-# Run the server
 python run.py
+```
 
-# Navigate to frontend directory
+Backend runs at:
+
+```text
+http://localhost:8000
+```
+
+### Frontend Setup
+
+```bash
 cd frontend
 
-# Install dependencies
 npm install
 
-# Create .env file
-echo "VITE_API_URL=http://localhost:8000" > .env
-
-# Start the development server
 npm run dev
+```
 
-# Build and start all services
-docker-compose up -d --build
+Frontend runs at:
 
-# Check running containers
-docker-compose ps
+```text
+http://localhost:5173
+```
 
-# View logs
-docker-compose logs
+---
 
-# Stop services
+## 🐳 Docker Setup
+
+### Build and Run
+
+```bash
+docker-compose up --build
+```
+
+### Run in Background
+
+```bash
+docker-compose up -d
+```
+
+### Stop Services
+
+```bash
 docker-compose down
+```
 
-# Build production images
-docker-compose -f docker-compose.prod.yml build
+---
 
-# Start production containers
-docker-compose -f docker-compose.prod.yml up -d
+## 📁 Project Structure
 
+```text
 inventory-management-system/
+│
 ├── backend/
 │   ├── app/
-│   │   ├── __init__.py
+│   │   ├── routers/
 │   │   ├── config.py
 │   │   ├── database.py
-│   │   ├── main.py
 │   │   ├── models.py
 │   │   ├── schemas.py
-│   │   └── routers/
-│   │       ├── __init__.py
-│   │       ├── products.py
-│   │       ├── customers.py
-│   │       ├── orders.py
-│   │       └── dashboard.py
-│   ├── .env
-│   ├── .env.example
-│   ├── .gitignore
+│   │   └── main.py
 │   ├── Dockerfile
-│   ├── Dockerfile.prod
 │   ├── requirements.txt
 │   └── run.py
+│
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Navigation.jsx
-│   │   │   ├── ProductList.jsx
-│   │   │   ├── ProductForm.jsx
-│   │   │   ├── CustomerList.jsx
-│   │   │   ├── CustomerForm.jsx
-│   │   │   ├── OrderList.jsx
-│   │   │   ├── OrderForm.jsx
-│   │   │   └── OrderDetail.jsx
 │   │   ├── pages/
-│   │   │   ├── Dashboard.jsx
-│   │   │   ├── Products.jsx
-│   │   │   ├── Customers.jsx
-│   │   │   └── Orders.jsx
 │   │   ├── services/
-│   │   │   └── api.js
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── .env
+│   │   └── App.jsx
 │   ├── Dockerfile
-│   ├── Dockerfile.prod
-│   ├── nginx.conf
-│   ├── package.json
-│   └── vite.config.js
+│   └── package.json
+│
 ├── docker-compose.yml
 ├── docker-compose.prod.yml
 └── README.md
+```
 
-# Database Configuration
-DATABASE_URL=postgresql://postgres:password@localhost:5432/inventory_db
+---
 
-# Application Configuration
+## 🔐 Environment Variables
+
+### Backend
+
+```env
+DATABASE_URL=postgresql://username:password@host:5432/database
+
 APP_NAME=Inventory Management System
-DEBUG=True
-API_V1_PREFIX=/api/v1
 
-# CORS Configuration
-BACKEND_CORS_ORIGINS=["http://localhost:5173", "http://localhost:3000"]
+DEBUG=False
+
+API_V1_PREFIX=/api/v1
+```
+
+### Frontend
+
+```env
+VITE_API_URL=https://inventory-management-system-production-eb67.up.railway.app
+```
+
+---
+
+## 📦 Deployment
+
+### Frontend
+
+Hosted on Vercel:
+
+```text
+https://inventory-management-system-9kynhwb0m-khateeb.vercel.app
+```
+
+### Backend
+
+Hosted on Railway:
+
+```text
+https://inventory-management-system-production-eb67.up.railway.app
+```
+
+### Database
+
+Hosted on Neon PostgreSQL.
+
+---
+
+## 👨‍💻 Author
+
+**Khateeb Ur Rahman**
+
+B.Tech Computer Science & Engineering
+Jamia Hamdard University
+
+GitHub: https://github.com/itskhateeb
+
+---
+
+## 📄 License
+
+This project was developed for educational, portfolio, and technical assessment purposes.
